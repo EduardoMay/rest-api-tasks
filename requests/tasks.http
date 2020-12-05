@@ -1,0 +1,29 @@
+###
+GET http://localhost:3000/api/v1/tasks
+
+###
+POST http://localhost:3000/api/v1/tasks
+Content-Type: application/json
+
+{
+    "title": "tarea 1",
+    "description": "una tarea muy importante",
+    "done": false
+}
+
+###
+GET http://localhost:3000/api/v1/tasks/5fcbbbf9f0257b04bc1c6eda
+
+###
+DELETE  http://localhost:3000/api/v1/tasks/5fcbbbf9f0257b04bc1c6ed3
+
+###
+GET http://localhost:3000/api/v1/tasks/done
+
+###
+PUT http://localhost:3000/api/v1/tasks/5fcbbcdee9720418e41c2003
+Content-Type: application/json
+
+{
+    "done": true
+}
