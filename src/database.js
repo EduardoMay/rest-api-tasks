@@ -1,15 +1,15 @@
-import mongoose from 'mongoose'
-import config from "./config";
+import mongoose from 'mongoose';
+import config from './config';
 
-(async() => {
-    try {
-        const db = await mongoose.connect(config.mongodbURL, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            useFindAndModify: false
-        })
-        console.log('database name:', db.connection.name);
-    } catch (error) {
-        console.error(error)
-    }
-})()
+(async () => {
+	try {
+		const db = await mongoose.connect(config.mongodbURL, {
+			useNewUrlParser: true,
+			useUnifiedTopology: true,
+			useFindAndModify: false,
+		});
+		console.log('database name:', db.connection.name);
+	} catch (error) {
+		console.error(error);
+	}
+})();
