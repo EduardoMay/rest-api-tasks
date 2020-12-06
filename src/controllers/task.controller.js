@@ -1,9 +1,9 @@
 import Task from "../models/Task"
 import { getPagination } from "../libs/getPagination"
 
-export const findAllTasks = async (req, res) => {
+export const findAllTasks = async ({query}, res) => {
     try {
-        const {size, page, title} = req.query;
+        const {size, page, title} = query;
 
         const condition = title ? {title: {$regex: new RegExp(title), $options: 'i'}} : {}
 
@@ -20,8 +20,10 @@ export const findAllTasks = async (req, res) => {
 
 }
 
-export const createTasks = async (req, res) => {
-    if (!req.body.title) {
+export const createTasks = async ({body}, res) => {
+    const {title, description, done} = body;
+
+    if (!title) {
         return res.status(400).send({
             message: 'Title is required'
         })
@@ -29,9 +31,9 @@ export const createTasks = async (req, res) => {
 
     try {
         const newtask = new Task({
-            title: req.body.title,
-            description: req.body.description,
-            done: req.body.done ? req.body.done : false
+            title: title,
+            description: description,
+            done: done ? done : false
         })
 
         const taskSave = await newtask.save();
@@ -44,9 +46,9 @@ export const createTasks = async (req, res) => {
     }
 }
 
-export const findOneTask = async (req, res) => {
+export const findOneTask = async ({ params }, res) => {
     try {
-        const { id } = req.params;
+        const { id } = params;
 
         const task = await Task.findById(id);
 
@@ -63,10 +65,10 @@ export const findOneTask = async (req, res) => {
     }
 }
 
-export const deleteTask = async (req, res) => {
-    try {
-        const id = req.params.id;
+export const deleteTask = async ({params}, res) => {
+    const { id } = params;
 
+    try {
         await Task.findByIdAndDelete(id)
 
         res.json({
