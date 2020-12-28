@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { mongoosePagination } from 'mongoose-paginate-v2';
+import mongoosePagination from 'mongoose-paginate-v2';
 
 const taskSchema = new Schema(
 	{
